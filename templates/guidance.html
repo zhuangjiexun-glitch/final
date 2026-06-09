@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星光指引 - 命運大廳</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="orb"></div>
+
+    <div style="display: flex; min-height: 100vh; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; padding: 20px; box-sizing: border-box;">
+        
+        <h1 class="fortune-title" style="margin-bottom: 10px; color: white; text-align: center;">
+            ✨ 星光指引
+        </h1>
+        <p class="fortune-subtitle" style="margin-bottom: 30px; color: white; text-align: center;">
+            在心中默想你的迷惘，星辰將給予你啟示
+        </p>
+
+        <div style="background: rgba(12, 8, 30, 0.6); padding: 40px; border-radius: 16px; border: 1px solid rgba(170, 120, 255, 0.4); max-width: 600px; width: 100%; text-align: center; box-shadow: 0 0 30px rgba(170, 120, 255, 0.1); box-sizing: border-box;">
+            
+            <div id="quizStartArea">
+                <div style="font-size: 80px; margin-bottom: 20px; display: inline-block; text-shadow: 0 0 20px rgba(170, 120, 255, 0.8);">🌌</div>
+                <p style="color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 25px; line-height: 1.6;">
+                    每個人心中都有一片專屬的星系。<br>
+                    請選擇你目前最想探索的領域，星辰將給予你專屬的指引。
+                </p>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; width: 100%;">
+                    <button onclick="startGuidanceQuiz('love')" style="background: rgba(255, 100, 150, 0.2); border: 1px solid #ff6496; color: white; padding: 12px 40px; border-radius: 8px; cursor: pointer; font-size: 18px; transition: 0.3s; width: 80%; max-width: 300px; font-family: inherit;">
+                        ❤️ 感情與緣分
+                    </button>
+                    <button onclick="startGuidanceQuiz('career')" style="background: rgba(100, 200, 255, 0.2); border: 1px solid #64c8ff; color: white; padding: 12px 40px; border-radius: 8px; cursor: pointer; font-size: 18px; transition: 0.3s; width: 80%; max-width: 300px; font-family: inherit;">
+                        🎓 學業與未來
+                    </button>
+                    <button onclick="startGuidanceQuiz('self')" style="background: rgba(170, 120, 255, 0.2); border: 1px solid #aa78ff; color: white; padding: 12px 40px; border-radius: 8px; cursor: pointer; font-size: 18px; transition: 0.3s; width: 80%; max-width: 300px; font-family: inherit;">
+                        🌌 靈魂與自我
+                    </button>
+                </div>
+            </div>
+
+            <div id="quizQuestionArea" style="display: none; flex-direction: column; align-items: center; width: 100%;">
+                <div style="color: rgba(170, 120, 255, 0.8); font-size: 14px; margin-bottom: 15px; letter-spacing: 1px;">
+                    探索進度 <span id="quizProgress">1 / 3</span>
+                </div>
+                <h3 id="quizQuestionText" style="color: white; font-size: 20px; margin-bottom: 25px; line-height: 1.6; font-weight: normal; text-align: left; width: 100%;">
+                    </h3>
+                <div id="quizOptions" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                    </div>
+            </div>
+
+            <div id="quizResultArea" style="display: none; flex-direction: column; align-items: center; width: 100%;">
+                <div id="quizLoading" style="color: #ffd700; font-style: italic; font-size: 18px; margin-bottom: 20px;">
+                    ✨ 正在解讀你的星象軌跡... ✨
+                </div>
+                
+                <div id="quizFinalContent" style="display: none; width: 100%;">
+                    <div id="resultIcon" style="font-size: 60px; margin-bottom: 10px;">🌟</div>
+                    <h2 id="resultTitle" style="color: #ffd700; margin-bottom: 15px; font-size: 24px;">你的星系</h2>
+                    
+                    <div style="text-align: left; background: rgba(0, 0, 0, 0.5); padding: 25px; border-radius: 12px; border: 1px solid rgba(170, 120, 255, 0.3); margin-bottom: 25px;">
+                        <p id="resultDesc" style="color: rgba(255, 255, 255, 0.9); font-size: 16px; line-height: 1.8; margin-bottom: 15px;"></p>
+                        <div style="border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 15px;">
+                            <strong style="color: #64c8ff; font-size: 16px;">給你的星光指引：</strong>
+                            <p id="resultAdvice" style="color: rgba(255, 255, 255, 0.8); font-size: 15px; line-height: 1.6; margin-top: 8px;"></p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(255, 100, 150, 0.1); border-left: 4px solid #ff6496; border-radius: 8px;">
+                            <div id="flowerLoading" style="color: #ff6496; font-size: 14px; font-style: italic;">
+                                🌸 宇宙花園正在為你挑選專屬花朵...
+                            </div>
+                            <div id="flowerMessage" style="display: none; color: rgba(255, 255, 255, 0.9); font-size: 15px; line-height: 1.6;">
+                                </div>
+                        </div>
+
+                    <button onclick="resetGuidanceQuiz()" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.4); color: rgba(255, 255, 255, 0.8); padding: 10px 30px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-size: 16px; font-family: inherit;">
+                        重新探索
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="back-btn" onclick="window.location.href='/'" style="position: absolute; top: 30px; left: 30px; background: rgba(170, 120, 255, 0.2); border: 1px solid rgba(170, 120, 255, 0.8); color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 16px; font-family: inherit; z-index: 20;">
+            ⬅ 返回大廳
+        </button>
+    </div>
+
+    <script src="/static/js/data.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/guidance.js"></script>
+</body>
+
+</html>

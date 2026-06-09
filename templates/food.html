@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天吃什麼 - 命運大廳</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        .food-tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .food-tab-btn.active {
+            background: rgba(170, 120, 255, 0.3);
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(170, 120, 255, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="orb"></div>
+
+    <div style="display: flex; min-height: 100vh; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; padding: 20px; box-sizing: border-box;">
+        
+        <h1 class="fortune-title" style="margin-bottom: 10px; color: white;">
+            🏮 今天吃什麼?
+        </h1>
+        <p class="fortune-subtitle" style="margin-bottom: 25px; color: white;">
+            交給命運，治好你的選擇困難症
+        </p>
+
+        <div style="background: rgba(12, 8, 30, 0.6); padding: 40px; border-radius: 16px; border: 1px solid rgba(170, 120, 255, 0.4); max-width: 550px; width: 100%; text-align: center; box-shadow: 0 0 30px rgba(170, 120, 255, 0.1); box-sizing: border-box;">
+            
+            <div style="display: flex; border-radius: 8px; overflow: hidden; border: 1px solid rgba(170, 120, 255, 0.4); margin-bottom: 25px;">
+                <button class="food-tab-btn active" data-target="mode-no-idea">🤷 完全沒想法</button>
+                <button class="food-tab-btn" data-target="mode-hard-choice">🤔 選擇困難</button>
+            </div>
+
+            <div id="mode-no-idea" class="food-mode-section">
+                <p style="color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 15px;">告訴我你現在的心情，幫你配對最適合的美食：</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+                    <button class="mood-btn" data-mood="joy" style="background: rgba(255, 215, 0, 0.15); border: 1px solid #ffd700; color: #ffd700; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s;">
+                        😆 喜 (慶祝/犒賞)
+                    </button>
+                    <button class="mood-btn" data-mood="anger" style="background: rgba(255, 100, 100, 0.15); border: 1px solid #ff6464; color: #ff6464; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s;">
+                        😤 怒 (發洩/重口味)
+                    </button>
+                    <button class="mood-btn" data-mood="sorrow" style="background: rgba(100, 200, 255, 0.15); border: 1px solid #64c8ff; color: #64c8ff; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s;">
+                        🥺 哀 (療癒/溫暖)
+                    </button>
+                    <button class="mood-btn" data-mood="fun" style="background: rgba(170, 120, 255, 0.15); border: 1px solid #aa78ff; color: #aa78ff; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s;">
+                        🥳 樂 (放鬆/小吃)
+                    </button>
+                </div>
+            </div>
+
+            <div id="mode-hard-choice" class="food-mode-section" style="display: none;">
+                <p style="color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 15px;">輸入你正在猶豫的選項 (用逗號 , 分隔)：</p>
+                <textarea id="customFoodList" style="width: 100%; height: 80px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; padding: 15px; font-size: 15px; resize: none; outline: none; box-sizing: border-box; margin-bottom: 15px;">麥當勞, 肯德基, 巷口麵店, 健康餐盒</textarea>
+                
+                <button id="manualRollBtn" style="width: 100%; background: rgba(170, 120, 255, 0.2); border: 1px solid #aa78ff; color: white; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; margin-bottom: 25px;">
+                    幫我決定！
+                </button>
+            </div>
+
+            <div id="foodResult" style="font-size: 32px; font-weight: bold; color: rgba(255,255,255,0.8); height: 100px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); overflow: hidden;">
+                等待命運指引...
+            </div>
+            
+        </div>
+
+        <button id="backToLobbyBtn" style="position: absolute; top: 30px; left: 30px; background: rgba(170, 120, 255, 0.2); border: 1px solid rgba(170, 120, 255, 0.8); color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 16px;">
+            ⬅ 返回大廳
+        </button>
+    </div>
+
+    <script src="/static/js/data.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/food.js"></script>
+</body>
+</html>

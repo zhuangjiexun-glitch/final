@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員登入 - 命運大廳</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="orb"></div>
+
+    <div style="display: flex; min-height: 100vh; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; padding: 20px;">
+        
+        <h1 class="fortune-title" id="authTitle">📝 會員註冊</h1>
+        <p class="fortune-subtitle" id="authSubtitle">留下姓名與信箱。</p>
+
+        <div class="register-card" style="position: relative; z-index: 5;">
+            <div class="auth-tab-group">
+                <button id="authTabRegister" class="auth-tab-btn auth-active" type="button" onclick="setAuthMode('register')">註冊</button>
+                <button id="authTabLogin" class="auth-tab-btn" type="button" onclick="setAuthMode('login')">登入</button>
+            </div>
+
+            <form id="registerForm" class="register-form auth-form">
+                <div class="form-group">
+                    <label for="registerName">姓名</label>
+                    <input id="registerName" name="name" type="text" placeholder="請輸入姓名" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">電子郵件</label>
+                    <input id="registerEmail" name="email" type="email" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">密碼</label>
+                    <input id="registerPassword" name="password" type="password" placeholder="請輸入密碼" required>
+                </div>
+                <button type="submit" class="submit-btn">註 冊</button>
+            </form>
+
+            <form id="loginForm" class="register-form auth-form" style="display:none;">
+                <div class="form-group">
+                    <label for="loginEmail">電子郵件</label>
+                    <input id="loginEmail" name="email" type="email" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">密碼</label>
+                    <input id="loginPassword" name="password" type="password" placeholder="請輸入密碼" required>
+                </div>
+                <button type="submit" class="submit-btn">登入</button>
+            </form>
+
+            <div class="register-meta" id="registerMeta">
+                目前已註冊：<span id="registeredCount">0</span> 人
+            </div>
+
+            <div class="register-alert" id="registerAlert"></div>
+            <div class="register-alert" id="loginAlert"></div>
+
+            
+        </div>
+
+        <button class="back-btn" onclick="window.location.href='/'" style="position: absolute; top: 30px; left: 30px; z-index: 1000; background: rgba(170, 120, 255, 0.2); border: 1px solid rgba(170, 120, 255, 0.8); color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 16px;">
+            ⬅ 返回大廳
+        </button>
+    </div>
+
+    <script src="/static/js/data.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!-- ===================== -->
+<!-- 每日運勢頁 -->
+<!-- ===================== -->
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日運勢 - 命運大廳</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body> <div class="stars" id="stars"></div>
+    <div class="orb"></div>
+
+    <div id="fortunePage" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; position: relative; z-index: 10;">
+
+        <h1 class="fortune-title">
+            🔮 每日運勢
+        </h1>
+
+        <p class="fortune-subtitle">
+            點擊水晶球，查看今天的命運
+        </p>
+
+        <div class="crystal-ball" onclick="getFortune()">
+            ✨
+        </div>
+
+        <div class="fortune-result" id="fortuneResult">
+            今天會發生什麼呢？
+        </div>
+
+        <button class="back-btn" onclick="window.location.href='/'" style="position: absolute; top: 30px; left: 30px; background: rgba(170, 120, 255, 0.2); border: 1px solid rgba(170, 120, 255, 0.8); color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 16px; font-family: inherit; z-index: 20;">
+            ⬅ 返回大廳
+        </button>
+
+    </div>
+
+    <script src="/static/js/data.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/fortune.js"></script>
+
+</body> </html>
